@@ -41,6 +41,16 @@ Tweet
     body: 'my third tweet'
   })
   .then(createdTweet => {
-    return Tweet.findByIdAndUpdate(createdTweet._id, { body: 'hello there' });
+    return Tweet.findByIdAndUpdate(createdTweet._id, { body: 'hello there' }, { new: true });
   })
   .then(updatedTweet => console.log(updatedTweet));
+
+Tweet
+  .create({
+    handle: 'leslie',
+    body: 'my fourth tweet'
+  })
+  .then(createdTweet => {
+    return Tweet.findByIdAndDelete(createdTweet._id);
+  })
+  .then(deleted => console.log(deleted));
