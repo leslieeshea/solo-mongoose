@@ -22,4 +22,5 @@ Tweet
     handle: 'leslie',
     body: 'my first tweet'
   })
-  .then(createdTweet => console.log(createdTweet));
+  .then(createdTweet => console.log(createdTweet))
+  .finally(() => mongoose.connection.close());
