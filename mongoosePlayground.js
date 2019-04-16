@@ -33,27 +33,19 @@ Dog
 Dog
   .find()
   .then(foundDogs => console.log(foundDogs))
-  .finally(() => {
-    mongoose.connection.close();
-  });
+  .finally(() => mongoose.connection.close());
 
 Dog
-  .findbyId('5cb61a479e6b250bbdd9321b')
+  .findById('5cb65421d809cf6cca2dacf8')
   .then(foundDog => console.log(foundDog._id))
-  .finally(() => {
-    mongoose.connection.close();
-  });
+  .finally(() => mongoose.connection.close());
 
 Dog
-  .findByIdAndUpdate('5cb61a479e6b250bbdd9321b'), { name: 'spot' }, { new: true }
+  .findByIdAndUpdate('5cb65421d809cf6cca2dacf8', { name: 'spot' }, { new: true })
   .then(updatedDog => console.log(updatedDog))
-  .finally(() => {
-    mongoose.connection.close();
-  });
+  .finally(() => mongoose.connection.close());
 
 Dog
-  .findByIdAndDelete('5cb61a479e6b250bbdd9321b')
+  .findByIdAndDelete('5cb65421d809cf6cca2dacf8')
   .then(result => console.log(result))
-  .finally(() => {
-    mongoose.connection.close();
-  });
+  .finally(() => mongoose.connection.close());
