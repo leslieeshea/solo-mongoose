@@ -34,3 +34,13 @@ Tweet
     return Tweet.findbyId(createdTweet._id);
   })
   .then(foundTweet => console.log(foundTweet._id));
+
+Tweet
+  .create({
+    handle: 'leslie',
+    body: 'my third tweet'
+  })
+  .then(createdTweet => {
+    return Tweet.findByIdAndUpdate(createdTweet._id, { body: 'hello there' });
+  })
+  .then(updatedTweet => console.log(updatedTweet));
