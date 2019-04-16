@@ -53,4 +53,25 @@ describe('tweet routes', () => {
         expect(res.body).toHaveLength(1);
       });
   });
+
+  it('can get a dog by id', () => {
+    return Dog.create({
+      name: 'charlie',
+      age: 1,
+      breed: 'golden retriever'
+    })
+      .then(createdDog => {
+        return request(app)
+          .get(`/dogs/${createdDog._id}`);
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          name: 'charlie',
+          age: 1,
+          breed: 'golden retriever',
+          _id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
 });
