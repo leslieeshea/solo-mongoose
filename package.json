@@ -8,6 +8,9 @@
     "test:watch": "npm run test -- --watch",
     "start": "node mongoosePlayground.js"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leslieeshea/solo-mongoose.git"
