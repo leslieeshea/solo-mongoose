@@ -4,49 +4,54 @@ mongoose.connect('mongodb://localhost:27017/dogs', {
   useNewUrlParser: true
 });
 
-const tweetSchema = new mongoose.Schema({
-  handle: {
+const dogSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true
   },
-  body: {
+  age: {
+    type: Number,
+    required: true
+  },
+  breed: {
     type: String,
     required: true
   }
 });
 
-const Tweet = mongoose.model('Tweet', tweetSchema);
+const Dog = mongoose.model('Dog', dogSchema);
 
-Tweet
+Dog
   .create({
-    handle: 'leslie',
-    body: 'my first tweet'
+    name: 'buddy',
+    age: 2,
+    breed: 'golden retriever'
   })
-  .then(createdTweet => console.log(createdTweet))
+  .then(createdDog => console.log(createdDog))
   .finally(() => mongoose.connection.close());
 
-Tweet
+Dog
   .find()
-  .then(foundTweets => console.log(foundTweets))
+  .then(foundDogs => console.log(foundDogs))
   .finally(() => {
     mongoose.connection.close();
   });
 
-Tweet
+Dog
   .findbyId('5cb61a479e6b250bbdd9321b')
-  .then(foundTweet => console.log(foundTweet._id))
+  .then(foundDog => console.log(foundDog._id))
   .finally(() => {
     mongoose.connection.close();
   });
 
-Tweet
-  .findByIdAndUpdate('5cb61a479e6b250bbdd9321b'), { handle: 'les' }, { new: true }
-  .then(updatedTweet => console.log(updatedTweet))
+Dog
+  .findByIdAndUpdate('5cb61a479e6b250bbdd9321b'), { name: 'spot' }, { new: true }
+  .then(updatedDog => console.log(updatedDog))
   .finally(() => {
     mongoose.connection.close();
   });
 
-Tweet
+Dog
   .findByIdAndDelete('5cb61a479e6b250bbdd9321b')
   .then(result => console.log(result))
   .finally(() => {
