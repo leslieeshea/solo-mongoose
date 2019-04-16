@@ -26,31 +26,29 @@ Tweet
   .finally(() => mongoose.connection.close());
 
 Tweet
-  .create({
-    handle: 'leslie',
-    body: 'my second tweet'
-  })
-  .then(createdTweet => {
-    return Tweet.findbyId(createdTweet._id);
-  })
-  .then(foundTweet => console.log(foundTweet._id));
+  .find()
+  .then(foundTweets => console.log(foundTweets))
+  .finally(() => {
+    mongoose.connection.close();
+  });
 
 Tweet
-  .create({
-    handle: 'leslie',
-    body: 'my third tweet'
-  })
-  .then(createdTweet => {
-    return Tweet.findByIdAndUpdate(createdTweet._id, { body: 'hello there' }, { new: true });
-  })
-  .then(updatedTweet => console.log(updatedTweet));
+  .findbyId('5cb61a479e6b250bbdd9321b')
+  .then(foundTweet => console.log(foundTweet._id))
+  .finally(() => {
+    mongoose.connection.close();
+  });
 
 Tweet
-  .create({
-    handle: 'leslie',
-    body: 'my fourth tweet'
-  })
-  .then(createdTweet => {
-    return Tweet.findByIdAndDelete(createdTweet._id);
-  })
-  .then(deleted => console.log(deleted));
+  .findByIdAndUpdate('5cb61a479e6b250bbdd9321b'), { handle: 'les' }, { new: true }
+  .then(updatedTweet => console.log(updatedTweet))
+  .finally(() => {
+    mongoose.connection.close();
+  });
+
+Tweet
+  .findByIdAndDelete('5cb61a479e6b250bbdd9321b')
+  .then(result => console.log(result))
+  .finally(() => {
+    mongoose.connection.close();
+  });
