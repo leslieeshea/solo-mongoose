@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
-    "start": "node mongoosePlayground.js"
+    "start:watch": "nodemon server.js",
+    "start": "node server.js"
   },
   "jest": {
     "testEnvironment": "node"
