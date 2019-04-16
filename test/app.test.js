@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../lib/app');
-// const Dog = require('../lib/models/Dog');
+const Dog = require('../lib/models/Dog');
 
 describe('tweet routes', () => {
   beforeAll(() => {
@@ -36,6 +36,21 @@ describe('tweet routes', () => {
           _id: expect.any(String),
           __v: 0
         });
+      });
+  });
+
+  it('can find a list of dogs', () => {
+    return Dog.create({
+      name: 'buddy',
+      age: 3,
+      breed: 'mini goldendoodle'
+    })
+      .then(() => {
+        return request(app)
+          .get('/dogs');
+      })
+      .then(res => {
+        expect(res.body).toHaveLength(1);
       });
   });
 });
