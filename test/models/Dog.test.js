@@ -25,7 +25,7 @@ describe('Dog model', () => {
 
     const errors = dog.validateSync().errors;
 
-    expect(errors.handle.message).toEqual('Path `name` is required.');
+    expect(errors.name.message).toEqual('Path `name` is required.');
   });
 
   it('has a required age field', () => {
@@ -36,7 +36,7 @@ describe('Dog model', () => {
 
     const errors = dog.validateSync().errors;
 
-    expect(errors.body.message).toEqual('Path `age` is required.');
+    expect(errors.age.message).toEqual('Path `age` is required.');
   });
 
   it('has a required breed field', () => {
@@ -47,6 +47,6 @@ describe('Dog model', () => {
 
     const errors = dog.validateSync().errors;
 
-    expect(errors.body.message).toEqual('Path `breed` is required.');
+    expect(errors.breed.message).toEqual('Path `breed` is required.');
   });
 });
