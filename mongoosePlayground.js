@@ -24,3 +24,13 @@ Tweet
   })
   .then(createdTweet => console.log(createdTweet))
   .finally(() => mongoose.connection.close());
+
+Tweet
+  .create({
+    handle: 'leslie',
+    body: 'my second tweet'
+  })
+  .then(createdTweet => {
+    return Tweet.findbyId(createdTweet._id);
+  })
+  .then(foundTweet => console.log(foundTweet._id));
