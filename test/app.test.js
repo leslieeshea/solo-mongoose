@@ -157,4 +157,19 @@ describe('user routes', () => {
         });
       });
   });
+
+  it('can find a list of users', () => {
+    return User.create({
+      handle: '@leslie',
+      name: 'leslie',
+      email: 'leslie@gmail.com'
+    })
+      .then(() => {
+        return request(app)
+          .get('/users');
+      })
+      .then(res => {
+        expect(res.body).toHaveLength(1);
+      });
+  });
 });
