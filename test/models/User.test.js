@@ -17,7 +17,7 @@ describe('User model', () => {
     });
   });
 
-  it('has a required handle field', () => {
+  it('has required handle field', () => {
     const user = new User({
       name: 'leslie',
       email: 'leslie@gmail.com'
@@ -35,5 +35,15 @@ describe('User model', () => {
 
     const errors = user.validateSync().errors;
     expect(errors.name.message).toEqual('Path `name` is required.');
+  });
+
+  it('has required email field', () => {
+    const user = new User({
+      handle: '@leslie',
+      name: 'leslie'
+    });
+
+    const errors = user.validateSync().errors;
+    expect(errors.email.message).toEqual('Path `email` is required.');
   });
 });
