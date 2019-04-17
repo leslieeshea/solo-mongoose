@@ -217,4 +217,25 @@ describe('user routes', () => {
         });
       });
   });
+
+  it('can delete a user by id', () => {
+    return User.create({
+      handle: '@leslie',
+      name: 'leslie',
+      email: 'leslie@gmail.com'
+    })
+      .then(createdUser => {
+        return request(app)
+          .delete(`/users/${createdUser._id}`);
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          handle: '@leslie',
+          name: 'leslie',
+          email: 'leslie@gmail.com',
+          _id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
 });
