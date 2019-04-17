@@ -37,7 +37,7 @@ describe('dog routes', () => {
     return mongoose.connection.close();
   });
 
-  it.only('can create a new dog', () => {
+  it('can create a new dog', () => {
     return User.create({
       handle: '@leslie',
       name: 'leslie',
@@ -65,12 +65,8 @@ describe('dog routes', () => {
       });
   });
 
-  it('can find a list of dogs', () => {
-    return Dog.create({
-      name: 'buddy',
-      age: 3,
-      breed: 'mini goldendoodle'
-    })
+  it.only('can find a list of dogs', () => {
+    return createDog()
       .then(() => {
         return request(app)
           .get('/dogs');
