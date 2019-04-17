@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 const Dog = require('../lib/models/Dog');
 
-describe('tweet routes', () => {
+describe('dog routes', () => {
   beforeAll(() => {
     return mongoose.connect('mongodb://localhost:27017/dogs', {
       useNewUrlParser: true,
