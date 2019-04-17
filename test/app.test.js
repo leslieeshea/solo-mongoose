@@ -70,8 +70,7 @@ describe('dog routes', () => {
           name: 'charlie',
           age: 1,
           breed: 'golden retriever',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
@@ -94,8 +93,7 @@ describe('dog routes', () => {
           name: 'buddy',
           age: 1,
           breed: 'golden retriever',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
@@ -115,8 +113,7 @@ describe('dog routes', () => {
           name: 'buddy',
           age: 3,
           breed: 'golden retriever',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
@@ -188,8 +185,7 @@ describe('user routes', () => {
           handle: '@leslie',
           name: 'leslie',
           email: 'leslie@gmail.com',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
@@ -212,8 +208,7 @@ describe('user routes', () => {
           handle: '@leslie',
           name: 'leslie',
           email: 'leslie@gmail.com',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
@@ -233,8 +228,7 @@ describe('user routes', () => {
           handle: '@leslie',
           name: 'leslie',
           email: 'leslie@gmail.com',
-          _id: expect.any(String),
-          __v: 0
+          _id: expect.any(String)
         });
       });
   });
