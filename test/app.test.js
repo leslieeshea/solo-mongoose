@@ -5,6 +5,22 @@ const Dog = require('../lib/models/Dog');
 const User = require('../lib/models/User');
 
 describe('dog routes', () => {
+  const createDog = () => {
+    return User.create({
+      handle: '@leslie',
+      name: 'leslie',
+      email: 'leslie@gmail.com'
+    })
+      .then(user => {
+        return Dog.create({
+          owner: user._id,
+          name: 'buddy',
+          age: 2,
+          breed: 'golden retriever'
+        });
+      });
+  };
+
   beforeAll(() => {
     return mongoose.connect('mongodb://localhost:27017/dogs', {
       useNewUrlParser: true,
@@ -21,16 +37,25 @@ describe('dog routes', () => {
     return mongoose.connection.close();
   });
 
-  it('can create a new dog', () => {
-    return request(app)
-      .post('/dogs')
-      .send({
-        name: 'buddy',
-        age: 2,
-        breed: 'mini goldendoodle'
+  it.only('can create a new dog', () => {
+    return User.create({
+      handle: '@leslie',
+      name: 'leslie',
+      email: 'leslie@gmail.com'
+    })
+      .then(user => {
+        return request(app)
+          .post('/dogs')
+          .send({
+            owner: user._id,
+            name: 'buddy',
+            age: 2,
+            breed: 'mini goldendoodle'
+          });
       })
       .then(res => {
         expect(res.body).toEqual({
+          owner: expect.any(String),
           name: 'buddy',
           age: 2,
           breed: 'mini goldendoodle',
