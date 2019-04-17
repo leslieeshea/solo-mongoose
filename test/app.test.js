@@ -65,7 +65,7 @@ describe('dog routes', () => {
       });
   });
 
-  it.only('can find a list of dogs', () => {
+  it('can find a list of dogs', () => {
     return createDog()
       .then(() => {
         return request(app)
@@ -76,20 +76,22 @@ describe('dog routes', () => {
       });
   });
 
-  it('can get a dog by id', () => {
-    return Dog.create({
-      name: 'charlie',
-      age: 1,
-      breed: 'golden retriever'
-    })
+  it.only('can get a dog by id', () => {
+    return createDog()
       .then(createdDog => {
         return request(app)
           .get(`/dogs/${createdDog._id}`);
       })
       .then(res => {
         expect(res.body).toEqual({
-          name: 'charlie',
-          age: 1,
+          owner: {
+            handle: '@leslie',
+            name: 'leslie',
+            email: 'leslie@gmail.com',
+            _id: expect.any(String)
+          },
+          name: 'buddy',
+          age: 2,
           breed: 'golden retriever',
           _id: expect.any(String)
         });
