@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 const app = require('./lib/app');
 
 const PORT = process.env.PORT || 7890;
 
-mongoose.connect('mongodb://localhost:27017/dogs', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true
