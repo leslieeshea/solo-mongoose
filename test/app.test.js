@@ -111,7 +111,11 @@ describe('tweet routes', () => {
       })
       .then(res => {
         expect(res.body).toEqual({
-          deleted: 1
+          name: 'buddy',
+          age: 3,
+          breed: 'golden retriever',
+          _id: expect.any(String),
+          __v: 0
         });
       });
   });
