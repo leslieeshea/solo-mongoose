@@ -2,14 +2,17 @@ const mongoose = require('mongoose');
 const Dog = require('../../lib/models/Dog');
 
 describe('Dog model', () => {
-  it('has a name, age and breed', () => {
+  it('has a owner, name, age and breed', () => {
+    const id = new mongoose.Types.ObjectId();
     const dog = new Dog({
+      owner: id,
       name: 'buddy',
       age: 5,
       breed: 'golden retriever'
     });
 
     expect(dog.toJSON()).toEqual({
+      owner: id,
       name: 'buddy',
       age: 5,
       breed: 'golden retriever',
