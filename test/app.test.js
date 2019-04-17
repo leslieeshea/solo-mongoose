@@ -193,4 +193,28 @@ describe('user routes', () => {
         });
       });
   });
+
+  it('can update a user by id', () => {
+    return User.create({
+      handle: '@@leslie',
+      name: 'leslie',
+      email: 'leslie@gmail.com'
+    })
+      .then(createdUser => {
+        return request(app)
+          .patch(`/users/${createdUser._id}`)
+          .send({
+            handle: '@leslie'
+          });
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          handle: '@leslie',
+          name: 'leslie',
+          email: 'leslie@gmail.com',
+          _id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
 });
