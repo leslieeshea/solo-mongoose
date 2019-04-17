@@ -74,4 +74,45 @@ describe('tweet routes', () => {
         });
       });
   });
+
+  it('can update a dog by id', () => {
+    return Dog.create({
+      name: 'charlie',
+      age: 1,
+      breed: 'golden retriever'
+    })
+      .then(createdDog => {
+        return request(app)
+          .patch(`/dogs/${createdDog._id}`)
+          .send({
+            name: 'buddy'
+          });
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          name: 'buddy',
+          age: 1,
+          breed: 'golden retriever',
+          _id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
+
+  it('can delete a dog by id', () => {
+    return Dog.create({
+      name: 'buddy',
+      age: 3,
+      breed: 'golden retriever'
+    })
+      .then(createdDog => {
+        return request(app)
+          .delete(`/dogs/${createdDog._id}`);
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          deleted: 1
+        });
+      });
+  });
 });
