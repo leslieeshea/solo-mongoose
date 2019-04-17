@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../lib/app');
 const Dog = require('../lib/models/Dog');
+const User = require('../lib/models/User');
 
 describe('dog routes', () => {
   beforeAll(() => {
@@ -114,6 +115,43 @@ describe('dog routes', () => {
           name: 'buddy',
           age: 3,
           breed: 'golden retriever',
+          _id: expect.any(String),
+          __v: 0
+        });
+      });
+  });
+});
+
+describe('user routes', () => {
+  beforeAll(() => {
+    return mongoose.connect('mongodb://localhost:27017/users', {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useCreateIndex: true
+    });
+  });
+
+  beforeEach(() => {
+    return mongoose.connection.dropDatabase();
+  });
+
+  afterAll(() => {
+    return mongoose.connection.close();
+  });
+  
+  it('can create a new user', () => {
+    return request(app)
+      .post('/users')
+      .send({
+        handle: '@leslie',
+        name: 'leslie',
+        email: 'leslie@gmail.com'
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          handle: '@leslie',
+          name: 'leslie',
+          email: 'leslie@gmail.com',
           _id: expect.any(String),
           __v: 0
         });
