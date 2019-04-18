@@ -123,7 +123,7 @@ describe('dog routes', () => {
       });
   });
 
-  it.only('can delete a dog by id', () => {
+  it('can delete a dog by id', () => {
     return createDog()
       .then(createdDog => {
         return Promise.all([
