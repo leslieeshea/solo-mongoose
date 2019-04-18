@@ -98,7 +98,7 @@ describe('dog routes', () => {
       });
   });
 
-  it.only('can update a dog by id', () => {
+  it('can update a dog by id', () => {
     return createDog()
       .then(createdDog => {
         return request(app)
@@ -123,22 +123,18 @@ describe('dog routes', () => {
       });
   });
 
-  it('can delete a dog by id', () => {
-    return Dog.create({
-      name: 'buddy',
-      age: 3,
-      breed: 'golden retriever'
-    })
+  it.only('can delete a dog by id', () => {
+    return createDog()
       .then(createdDog => {
-        return request(app)
-          .delete(`/dogs/${createdDog._id}`);
+        return Promise.all([
+          Promise.resolve(createdDog._id.toString()),
+          request(app)
+            .delete(`/dogs/${createdDog._id}`)
+        ]);
       })
-      .then(res => {
+      .then(([_id, res]) => {
         expect(res.body).toEqual({
-          name: 'buddy',
-          age: 3,
-          breed: 'golden retriever',
-          _id: expect.any(String)
+          _id
         });
       });
   });
